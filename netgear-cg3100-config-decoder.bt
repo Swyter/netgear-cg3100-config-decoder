@@ -12,6 +12,14 @@
 //------------------------------------------------
 
 ubyte salted_md5[16] <format=hex>;
-char routerid[76];
-uint size <format=hex>;
-uint thing[6] <format=hex>;
+
+struct
+{
+    char routerid_string[76];
+    uint size <format=hex>;
+    uint thing[1] <format=hex>;
+
+    ushort a,len;
+    char str[len];
+} config;
+
