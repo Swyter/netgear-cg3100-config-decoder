@@ -32,8 +32,9 @@ typedef struct
 {
     ushort as <format=hex>;
     char tag[4];
-    byte content[as - 6];
-} block_tag <optimize=false, read=this.tag>;
+    ubyte ver_a, ver_b;
+    byte content[as - 6 - 2];
+} block_tag <optimize=false, read=Str("%s [%u.%u]", this.tag, this.ver_a, this.ver_b)>;
 
 
 ubyte salted_md5[16] <format=hex>;
