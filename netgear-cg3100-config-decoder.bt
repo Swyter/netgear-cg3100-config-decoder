@@ -86,7 +86,17 @@ typedef struct
     }
     else if (Strcmp(tag, "Ntgr") == 0) /* Ntgr [0.14] */
     {
-        int i;
+        byte pad[1800 - 1];
+        uint unk, un;
+        char superuser[16];
+        char superuser_password[16];
+        ushort tt[4];
+        byte unkk[8];
+        byte eightyone;
+        char admin[16];
+        char admin_password[16];
+        char admin_b[16];
+        char admin_password_b[16];
     }
 
 
