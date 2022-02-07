@@ -37,7 +37,7 @@ typedef struct
 
     //byte content[as - 6 - 2];
 
-    if (Strcmp(tag, "8021") == 0) /* 8021 [0.29] */
+    if      (Strcmp(tag, "8021") == 0) /* 8021 [0.29] */
     {
         int a;
     }
@@ -45,14 +45,39 @@ typedef struct
     {
         int b;
     }
-    else if (Strcmp(tag, "FIRE") == 0) /* FIRE [0.7] */
+    else if (Strcmp(tag, "FIRE") == 0) /* FIRE [0.07] */
     {
         int c;
     }
+    else if (Strcmp(tag, "CSP.") == 0) /* CSP. [1.04] */
+    {
+        int d;
+    }
+    else if (Strcmp(tag, "CDP.") == 0) /* CDP. [1.05] */
+    {
+        int e;
+    }
+    else if (Strcmp(tag, "MLog") == 0) /* MLog [0.05] */
+    {
+        int f;
+    }
+    else if (Strcmp(tag, "PRNT") == 0) /* PRNT [0.05] */
+    {
+        int g;
+    }
+    else if (Strcmp(tag, "RG..") == 0) /* RG.. [0.30] */
+    {
+        int h;
+    }
+    else if (Strcmp(tag, "Ntgr") == 0) /* Ntgr [0.14] */
+    {
+        int i;
+    }
+
 
     FSeek(saved_offset);
     FSkip(block_size);
-} block_tag <optimize=false, read=Str("%s [%u.%u]", this.tag, this.ver_a, this.ver_b)>;
+} block_tag <optimize=false, read=Str("%s [%u.%02u]", this.tag, this.ver_a, this.ver_b)>;
 
 
 ubyte salted_md5[16] <format=hex>;
@@ -60,10 +85,9 @@ ubyte salted_md5[16] <format=hex>;
 struct config_t
 {
     char routerid_string[74]; /* swy: 6u9e9ewf0jt9y85w690je4669jye4d-056t9p48jp4ee6u9ee659jy9e-54e4j6r0j069k-056 */
-    byte ver_a, ver_b;
+    byte ver_a, ver_b;        /* swy: 0x0102 => 1.2, maybe */
     uint size <format=hex>;   /* swy: more often than not there's an extra/tailing 0x1 or 0x0 byte after the stated size; which breaks the bcm2cfg validation because that tool only chops off the first 16 bytes and appends the MD5 salt without reading the actual byte count here */
 
-    
     while (FTell() < FileSize() - 1)
         block_tag block;
 
