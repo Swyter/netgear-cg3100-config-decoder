@@ -88,15 +88,26 @@ typedef struct
     {
         byte pad[1800 - 1];
         uint unk, un;
+
         char superuser[16];
         char superuser_password[16];
+
         ushort tt[4];
         byte unkk[8];
         byte eightyone;
+
         char admin[16];
         char admin_password[16];
+
         char admin_b[16];
         char admin_password_b[16];
+
+        byte more[17];
+
+        rgltag admin_dynamic;
+        rgltag passw_dynamic;
+        ulong zeros[2];
+        rgltag CM;
     }
 
 
