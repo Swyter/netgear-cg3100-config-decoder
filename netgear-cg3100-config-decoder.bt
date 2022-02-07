@@ -39,11 +39,12 @@ typedef struct
 
     if      (Strcmp(tag, "8021") == 0) /* 8021 [0.29] */
     {
-        int a;
+        char wifi_ssid[33];
     }
     else if (Strcmp(tag, "WiGu") == 0) /* WiGu [0.10] */
     {
-        int b;
+        ushort num; byte zero;
+        char wifi_ssid[33];
     }
     else if (Strcmp(tag, "FIRE") == 0) /* FIRE [0.07] */
     {
