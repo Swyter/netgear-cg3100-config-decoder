@@ -59,11 +59,13 @@ typedef struct
     }
     else if (Strcmp(tag, "MLog") == 0) /* MLog [0.05] */
     {
-        int f;
+        rgltag tags[9];
+        char admin[16];
+        char passw[17];
     }
     else if (Strcmp(tag, "PRNT") == 0) /* PRNT [0.05] */
     {
-        int g;
+        rgltag tags[3];
     }
     else if (Strcmp(tag, "RG..") == 0) /* RG.. [0.30] */
     {
