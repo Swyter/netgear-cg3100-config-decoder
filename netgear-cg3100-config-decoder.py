@@ -1,6 +1,6 @@
 from ast import arguments
 import os, sys
-import hashlib
+import hashlib, struct
 
 filename="GatewaySettings(6).bin"
 
@@ -60,6 +60,9 @@ with open(f"{filename}{suffix}", "wb") as fout:
         fout.write(int.to_bytes(b_dec[i], 1, "little"))
 
 if not encode:
+    stated_size = struct.unpack(">I", b_dec[0x5c:0x60])[0]
+    print(f'[i] stated size: {stated_size:#x}, actual size: {len(b_dec[16:]):#x}')
+
     # swy: thanks to Joseph Lehner for all the work; see gwsettings.cc and FORMAT.md in bcm2-utils
     ret = hashlib.md5(b_dec[16:] + b"\x32\x50\x73\x6c\x63\x3b\x75\x28\x65\x67\x6d\x64\x30\x2d\x27\x78")
     print(f'[i] computed MD5 hash: {ret.digest().hex()}')
