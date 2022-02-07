@@ -17,8 +17,9 @@ ubyte salted_md5[16] <format=hex>;
 
 struct config_t
 {
-    char routerid_string[76];
-    uint size <format=hex>;
+    char routerid_string[74]; /* swy: 6u9e9ewf0jt9y85w690je4669jye4d-056t9p48jp4ee6u9ee659jy9e-54e4j6r0j069k-056 */
+    byte ver_a, ver_b;
+    uint size <format=hex>;   /* swy: more often than not there's an extra/tailing 0x1 or 0x0 byte after the stated size; which breaks the bcm2cfg validation because that tool only chops off the first 16 bytes and appends the MD5 salt without reading the actual byte count here */
 
     ushort as<format=hex>;; 
     char tag[4];
