@@ -13,6 +13,22 @@
 
 BigEndian();
 
+typedef struct
+{
+    byte tag_len;
+    if (tag_len)
+        char s[tag_len];
+} rgltag <read=read_rgltag, optimize=false>;
+
+string read_rgltag(struct rgltag& _thing)
+{
+    if (_thing.tag_len <= 0)
+        return "";
+    else
+        return _thing.s;
+}
+
+
 ubyte salted_md5[16] <format=hex>;
 
 struct config_t
@@ -28,11 +44,7 @@ struct config_t
     char str[len];
 
     FSeek(0x2ab);
-    struct str
-    {
-        byte len;
-        char str[len];
-    } a[20] <optimize=false>;
+    rgltag aa[20];
 
     byte prev;
     byte pad[size-(startof(prev)+1 - startof(config))];
