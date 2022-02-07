@@ -64,6 +64,6 @@ if not encode:
     print(f'[i] stated size: {stated_size:#x}, actual size: {len(b_dec[16:]):#x}')
 
     # swy: thanks to Joseph Lehner for all the work; see gwsettings.cc and FORMAT.md in bcm2-utils
-    ret = hashlib.md5(b_dec[16:] + b"\x32\x50\x73\x6c\x63\x3b\x75\x28\x65\x67\x6d\x64\x30\x2d\x27\x78")
+    ret = hashlib.md5(b_dec[16:16 + stated_size] + b"\x32\x50\x73\x6c\x63\x3b\x75\x28\x65\x67\x6d\x64\x30\x2d\x27\x78")
     print(f'[i] computed MD5 hash: {ret.digest().hex()}')
     print(f'[i] existing MD5 hash: {  b_dec[:16].hex()}', ret.digest() == b_dec[:16] and '(valid)' or '(invalid)')
