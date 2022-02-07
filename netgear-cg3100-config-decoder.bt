@@ -27,6 +27,13 @@ struct config_t
     ushort len;
     char str[len];
 
+    FSeek(0x2ab);
+    struct str
+    {
+        byte len;
+        char str[len];
+    } a[20] <optimize=false>;
+
     byte prev;
     byte pad[size-(startof(prev)+1 - startof(config))];
 } config <open=true>;
