@@ -30,10 +30,28 @@ string read_rgltag(struct rgltag& _thing)
 
 typedef struct
 {
-    ushort as <format=hex>;
+    local int saved_offset =  FTell();
+    ushort block_size <format=hex>;
     char tag[4];
     ubyte ver_a, ver_b;
-    byte content[as - 6 - 2];
+
+    //byte content[as - 6 - 2];
+
+    if (Strcmp(tag, "8021") == 0) /* 8021 [0.29] */
+    {
+        int a;
+    }
+    else if (Strcmp(tag, "WiGu") == 0) /* WiGu [0.10] */
+    {
+        int b;
+    }
+    else if (Strcmp(tag, "FIRE") == 0) /* FIRE [0.7] */
+    {
+        int c;
+    }
+
+    FSeek(saved_offset);
+    FSkip(block_size);
 } block_tag <optimize=false, read=Str("%s [%u.%u]", this.tag, this.ver_a, this.ver_b)>;
 
 
@@ -45,12 +63,14 @@ struct config_t
     byte ver_a, ver_b;
     uint size <format=hex>;   /* swy: more often than not there's an extra/tailing 0x1 or 0x0 byte after the stated size; which breaks the bcm2cfg validation because that tool only chops off the first 16 bytes and appends the MD5 salt without reading the actual byte count here */
 
-    block_tag a[9];
+    
+    while (FTell() < FileSize() - 1)
+        block_tag block;
 
     FSeek(0x2ab);
     ///rgltag aa[20];
 
-    byte prev;
-    byte pad[size-(startof(prev)+1 - startof(config))];
+    //byte prev;
+    //byte pad[size-(startof(prev)+1 - startof(config))];
 } config <open=true>;
 
