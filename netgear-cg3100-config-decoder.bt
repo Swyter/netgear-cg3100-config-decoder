@@ -1,0 +1,17 @@
+//------------------------------------------------
+//--- 010 Editor v12.0.1 Binary Template
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+
+ubyte salted_md5[16] <format=hex>;
+char routerid[76];
+uint size <format=hex>;
+uint thing[6] <format=hex>;
