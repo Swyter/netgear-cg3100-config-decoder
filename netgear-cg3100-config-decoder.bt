@@ -70,7 +70,11 @@ typedef struct
     }
     else if (Strcmp(tag, "RG..") == 0) /* RG.. [0.30] */
     {
-        int h;
+        byte h;
+        char password[9];
+        char netgear[256]; /* Netgear */
+        ubyte crap[0x1a];
+        char model[256]; /* CG3100 */
     }
     else if (Strcmp(tag, "Ntgr") == 0) /* Ntgr [0.14] */
     {
