@@ -11,15 +11,22 @@
 //   History: 
 //------------------------------------------------
 
+BigEndian();
+
 ubyte salted_md5[16] <format=hex>;
 
-struct
+struct config_t
 {
     char routerid_string[76];
     uint size <format=hex>;
-    uint thing[1] <format=hex>;
 
-    ushort a,len;
+    ushort as<format=hex>;; 
+    char tag[4];
+
+    ushort len;
     char str[len];
+
+    byte prev;
+    byte pad[size-(startof(prev)+1 - startof(config))];
 } config;
 
