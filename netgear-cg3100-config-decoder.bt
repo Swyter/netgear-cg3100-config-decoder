@@ -29,5 +29,5 @@ struct config_t
 
     byte prev;
     byte pad[size-(startof(prev)+1 - startof(config))];
-} config;
+} config <open=true>;
 
