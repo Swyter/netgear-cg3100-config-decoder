@@ -61,6 +61,7 @@ with open(f"{filename}{suffix}", "wb") as fout:
         fout.write(int.to_bytes(b_dec[i], 1, "little"))
 
 if not encode:
+    # swy: big endian uint; at offset 0x4c
     stated_size = struct.unpack(">I", b_dec[0x5c:0x60])[0]
     print(f'[i] stated size: {stated_size:#x}, actual size: {len(b_dec[16:]):#x}')
 
