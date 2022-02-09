@@ -106,7 +106,7 @@ typedef struct
 
         rgltag admin_dynamic;
         rgltag passw_dynamic;
-        ulong zeros[2];
+        byte padd[8];
         rgltag CM;
     }
 
