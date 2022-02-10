@@ -89,7 +89,7 @@ typedef struct
         ubyte gateway_ip[4];
         uint one; ubyte gateway_ip_b[4];
         
-        char crap[15 + 15 - 4]; 
+        uint one, zero, forty, zero, one; ubyte gateway_ip_c[4];
 
         struct { char more[4]; short u; time_t a, b; byte e; ubyte ip_addr[4]; uint number; byte six; ubyte mac_addr[six]<format=hex>; rgltag thing; } dhcp_entry[16]<optimize=false>;
 
@@ -159,10 +159,10 @@ string comment_block_tag( block_tag &r )
     if      (Strcmp(r.tag, "8021") == 0) /* 8021 [0.29] */ return "Wi-Fi (IEEE 802.11)";
     else if (Strcmp(r.tag, "WiGu") == 0) /* WiGu [0.10] */ return "Wi-Fi guest";
     else if (Strcmp(r.tag, "FIRE") == 0) /* FIRE [0.07] */ return "Firewall";
-    else if (Strcmp(r.tag, "CSP.") == 0) /* CSP. [1.04] */ return "???";
-    else if (Strcmp(r.tag, "CDP.") == 0) /* CDP. [1.05] */ return "DHCP";
+    else if (Strcmp(r.tag, "CSP.") == 0) /* CSP. [1.04] */ return "Static configuration protocol (SCP ??)";
+    else if (Strcmp(r.tag, "CDP.") == 0) /* CDP. [1.05] */ return "Dynamic configuration protocol (DHCP - DCP?)";
     else if (Strcmp(r.tag, "MLog") == 0) /* MLog [0.05] */ return "Multiple systems operator (MSO) login credentials";
-    else if (Strcmp(r.tag, "PRNT") == 0) /* PRNT [0.05] */ return "Print";
+    else if (Strcmp(r.tag, "PRNT") == 0) /* PRNT [0.05] */ return "Print / Private network (??)";
     else if (Strcmp(r.tag, "RG..") == 0) /* RG.. [0.30] */ return "Residential gateway";
     else if (Strcmp(r.tag, "Ntgr") == 0) /* Ntgr [0.14] */ return "Netgear";
     return "";
