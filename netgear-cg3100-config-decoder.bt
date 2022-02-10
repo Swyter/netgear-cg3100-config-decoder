@@ -89,9 +89,9 @@ typedef struct
         ubyte gateway_ip[4];
         uint one; ubyte gateway_ip_b[4];
         
-        char crap[15 + 15]; 
+        char crap[15 + 15 - 4]; 
 
-        struct { char moree[11]; ubyte ip_addr[4]; uint number; byte six; ubyte mac_addr[6]<format=hex>; rgltag thing; char more[4]; } dhcp_entry[7]<optimize=false>;
+        struct { char more[4]; short u; time_t a, b; byte e; ubyte ip_addr[4]; uint number; byte six; ubyte mac_addr[six]<format=hex>; rgltag thing; } dhcp_entry[16]<optimize=false>;
 
         struct { char content[25]; } first[15]; //356 / 25];
         struct { char content[14]; } second[882 / 14];
