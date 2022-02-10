@@ -140,6 +140,16 @@ typedef struct
         short empty;
         uint blank;
         uint rg_settings_a; /* 0x9c -> 0x8c Respond to Ping on Internet Port / 0x30 -> 0x32 Default DMZ Server / 0x32 -> 0x36: Use Static IP Address */
+        // 1
+        //  1
+        //   1
+        //    1 -> (Don't) Respond to Ping on Internet Port
+        //
+        //      1
+        //       1 -> Use These DNS Servers (Set) / Use Static IP Address  (DNS IPs stored at MLog start -0x6D until -0x64)
+        //        1 -> Default DMZ Server (Set)
+        //         1
+
         ubyte default_dmz_server_ip[4]; /* Default DMZ Server */
         ubyte use_static_ip_addr[4]; /* Internet Setup - Use Static IP Address: IP Address         */
         ubyte use_static_ip_mask[4]; /*                                         IP Subnet Mask     */
