@@ -34,6 +34,15 @@ typedef struct
     if      (Strcmp(tag, "8021") == 0) /* 8021 [0.29] */
     {
         char wifi_ssid[33];
+        char settings_block[91];
+        char crap[0xef];
+        rgltag passwd;
+        char more_crap[0xa7];
+        rgltag tags[4];
+        char aa[3];
+        rgltag tags[5];
+        char aaa;
+        rgltag tags[6];
     }
     else if (Strcmp(tag, "WiGu") == 0) /* WiGu [0.10] */
     {
