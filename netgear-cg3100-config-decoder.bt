@@ -84,13 +84,15 @@ typedef struct
         uint one; ubyte ip_addr_min[4];
         uint one; ubyte ip_addr_max[4];
         uint one; ubyte subnet_mask[4];
-        uint zero, one;
+        uint zero;
 
-        ubyte gateway_ip[4];
+        uint one; ubyte gateway_ip[4];
         uint one; ubyte gateway_ip_b[4];
         
-        uint one, zero, forty, zero, one; ubyte gateway_ip_c[4];
+        uint one, zero, forty, zero;
+        uint one; ubyte gateway_ip_c[4];
 
+        char tt[2];
         struct { char more[4]; short u; time_t a, b; byte e; ubyte ip_addr[4]; uint number; byte six; ubyte mac_addr[six]<format=hex>; rgltag thing; } dhcp_entry[16]<optimize=false>;
 
         struct { char content[25]; } first[15]; //356 / 25];
