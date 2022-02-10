@@ -112,13 +112,21 @@ typedef struct
     }
     else if (Strcmp(tag, "MLog") == 0) /* MLog [0.05] */
     {
-        rgltag tags[9];
-        char admin[16];
+        byte pad; rgltag superuser;
+        byte pad; rgltag superuser_pwd;
+        byte pad; rgltag mso;
+        byte pad; rgltag mso_pwd;
+        byte pad; char admin[16];
         char passw[17];
+        ubyte config[16];
     }
     else if (Strcmp(tag, "PRNT") == 0) /* PRNT [0.05] */
     {
-        rgltag tags[3];
+        uint string_count;
+        char broadcom[10];
+        uint string_count,b,c;
+        rgltag defaultt;
+        uint one; rgltag defaultt;
     }
     else if (Strcmp(tag, "RG..") == 0) /* RG.. [0.30] */
     {
