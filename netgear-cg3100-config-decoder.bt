@@ -79,7 +79,7 @@ typedef struct
     }
     else if (Strcmp(tag, "CDP.") == 0) /* CDP. [1.05] */
     {
-        char crap[116]; rgltag thing; char more[4];
+        char crap[116 - 15]; ubyte ip_addr[4]; uint number; byte a; ubyte mac_addr[6]<format=hex>; rgltag thing; char more[4];
 
         struct { char content[25]; } first[15]; //356 / 25];
         struct { char content[14]; } second[882 / 14];
