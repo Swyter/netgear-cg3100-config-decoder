@@ -1,14 +1,12 @@
 //------------------------------------------------
 //--- 010 Editor v12.0.1 Binary Template
 //
-//      File: 
-//   Authors: 
-//   Version: 
-//   Purpose: 
-//  Category: 
-// File Mask: 
-//  ID Bytes: 
-//   History: 
+//      File: Netgear GC3100 *decoded* config backup
+//   Authors: Swyter
+//   Version: 2022.02.08
+//   Purpose: Open descrambled GatewaySettings.bin files.
+//  Category: Network
+// File Mask: GatewaySettings*.bin*
 //------------------------------------------------
 
 BigEndian();
@@ -30,12 +28,10 @@ string read_rgltag(struct rgltag& _thing)
 
 typedef struct
 {
-    local int saved_offset =  FTell();
-    ushort block_size <format=hex>;
-    char tag[4];
-    ubyte ver_a, ver_b;
+    local int saved_offset = FTell();
 
-    //byte content[as - 6 - 2];
+    ushort block_size <format=hex>;
+    char tag[4]; ubyte ver_a, ver_b;
 
     if      (Strcmp(tag, "8021") == 0) /* 8021 [0.29] */
     {
@@ -110,9 +106,9 @@ typedef struct
         rgltag CM;
     }
 
-
     FSeek(saved_offset);
     FSkip(block_size);
+
 } block_tag <optimize=false, read=Str("%s [%u.%02u]", this.tag, this.ver_a, this.ver_b), comment=RecordComment>;
 
 string RecordComment( block_tag &r )
@@ -129,21 +125,17 @@ string RecordComment( block_tag &r )
     return "";
 }
 
-ubyte salted_md5[16] <format=hex>;
+ubyte salted_md5[16] <format=hex, comment="MD5 checksum of the config data block, using the provided size. Append the magic «2Pslc;u(egmd0-'x» salt value afterwards.">;
 
 struct config_t
 {
-    char routerid_string[74]; /* swy: 6u9e9ewf0jt9y85w690je4669jye4d-056t9p48jp4ee6u9ee659jy9e-54e4j6r0j069k-056 */
-    byte ver_a, ver_b;        /* swy: 0x0102 => 1.2, maybe */
-    uint size <format=hex>;   /* swy: more often than not there's an extra/tailing 0x1 or 0x0 byte after the stated size; which breaks the bcm2cfg validation because that tool only chops off the first 16 bytes and appends the MD5 salt without reading the actual byte count here */
+    char routerid_string[74];                       /* swy: 6u9e9ewf0jt9y85w690je4669jye4d-056t9p48jp4ee6u9ee659jy9e-54e4j6r0j069k-056 */
+    byte ver_a, ver_b;                              /* swy: 0x0102 => 1.2, maybe */
+    uint size <format=hex, comment="Total size">;   /* swy: more often than not there's an extra/tailing 0x1 or 0x0 byte after the stated size; which breaks the bcm2cfg validation because that tool only chops off the first 16 bytes and appends the MD5 salt without reading the actual byte count here */
 
     while (FTell() < FileSize() - 1)
         block_tag block;
 
-    FSeek(0x2ab);
-    ///rgltag aa[20];
-
     //byte prev;
     //byte pad[size-(startof(prev)+1 - startof(config))];
 } config <open=true>;
-
