@@ -139,11 +139,11 @@ typedef struct
         char vendor[256];  /* Netgear */
         short empty;
         uint blank;
-        uint rg_settings_a; /* 0x9c -> 0x8c Respond to Ping on Internet Port / 0x30 -> 0x32 Default DMZ Server  */
+        uint rg_settings_a; /* 0x9c -> 0x8c Respond to Ping on Internet Port / 0x30 -> 0x32 Default DMZ Server / 0x32 -> 0x36: Use Static IP Address */
         ubyte default_dmz_server_ip[4]; /* Default DMZ Server */
-        uint rg_settings_c;
-        uint rg_settings_d;
-        uint rg_settings_e;
+        ubyte use_static_ip_addr[4]; /* Internet Setup - Use Static IP Address: IP Address         */
+        ubyte use_static_ip_mask[4]; /*                                         IP Subnet Mask     */
+        ubyte    gateway_ip_addr[4]; /*                                         Gateway IP Address */
         char model_a[256]; /* CG3100 */
         char model_b[256]; /* empty */
         char model_c[256]; /* empty */
