@@ -117,14 +117,13 @@ typedef struct
         byte pad; rgltag mso;
         byte pad; rgltag mso_pwd;
         byte pad; char admin[16];
-        char passw[17];
+                  char passw[17];
         ubyte config[16];
     }
     else if (Strcmp(tag, "PRNT") == 0) /* PRNT [0.05] */
     {
-        uint zero;
-        char broadcom[10];
-        uint a, one, thirty;
+        char broadcom_tag[16];
+        ushort one_one; uint one_head, thirty;
 
         rgltag default_a;  uint one;
         rgltag anonymizer; uint one;
