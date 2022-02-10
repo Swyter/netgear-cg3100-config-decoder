@@ -81,7 +81,7 @@ typedef struct
     {
         char crap[116 - 15]; 
 
-        struct { ubyte ip_addr[4]; uint number; byte a; ubyte mac_addr[6]<format=hex>; rgltag thing; char more[4]; char moree[11]; } dhcp_entry[3];
+        struct { ubyte ip_addr[4]; uint number; byte six; ubyte mac_addr[6]<format=hex>; rgltag thing; char more[4]; char moree[11]; } dhcp_entry[7]<optimize=false>;
 
         struct { char content[25]; } first[15]; //356 / 25];
         struct { char content[14]; } second[882 / 14];
