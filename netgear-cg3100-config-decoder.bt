@@ -89,11 +89,22 @@ typedef struct
         uint one; ubyte gateway_ip[4];
         uint one; ubyte gateway_ip_b[4];
         
-        uint one, zero, forty, zero;
+        uint one, zero, sixtyfour, zero;
         uint one; ubyte gateway_ip_c[4];
 
         char tt[2];
-        struct { char more[4]; short u; time_t a, b; byte e; ubyte ip_addr[4]; uint number; byte six; ubyte mac_addr[six]<format=hex>; rgltag thing; } dhcp_entry[16]<optimize=false>;
+        struct
+        {
+            ubyte optional_mac_addr[6] <format=hex>; /* swy: when config number is 4, maybe */
+            time_t start, end;
+            byte one; ubyte ip_addr[4];
+            uint config_number; /* 0: free, 1 or 4 otherwise */
+
+            /* swy: variable size, for some reason */
+            byte six; ubyte mac_addr[six] <format=hex>;
+
+            rgltag thing;
+        } dhcp_entry[16] <optimize=false>;
 
         struct { char content[25]; } first[15]; //356 / 25];
         struct { char content[14]; } second[882 / 14];
