@@ -37,19 +37,20 @@ typedef struct
     }
     else if (Strcmp(tag, "WiGu") == 0) /* WiGu [0.10] */
     {
-        byte zero;
         struct elem
         {
-            ushort num;
+            byte zero;
+            ubyte num;
+            byte zero;
             char wifi_ssid[33];
-            ushort numb;
-            char buf[74];
+            char buf[76];
             char pad[40];
             uint thing;
-            uint padb;
-            uint thingb[7];
+            uint padb[2];
+            ushort part_a, part_b;
+            uint thingb[6];
             uint one;
-            char bfpad[0xbf];
+            char bfpad[0xba];
         } guest_elem[3];
     }
     else if (Strcmp(tag, "FIRE") == 0) /* FIRE [0.07] */
