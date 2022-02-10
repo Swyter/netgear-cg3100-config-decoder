@@ -122,11 +122,16 @@ typedef struct
     }
     else if (Strcmp(tag, "PRNT") == 0) /* PRNT [0.05] */
     {
-        uint string_count;
+        uint zero;
         char broadcom[10];
-        uint string_count,b,c;
-        rgltag defaultt;
-        uint one; rgltag defaultt;
+        uint a, one, thirty;
+
+        rgltag default_a;  uint one;
+        rgltag anonymizer; uint one;
+        rgltag anonymizer_dot_com;
+        rgltag default_b;
+
+        byte pad[3]; uint config[9];
     }
     else if (Strcmp(tag, "RG..") == 0) /* RG.. [0.30] */
     {
