@@ -83,7 +83,7 @@ typedef struct
 
         struct { char content[25]; } first[15]; //356 / 25];
         struct { char content[14]; } second[882 / 14];
-        struct { char content[15]; } third[93 / 15];
+        struct { char content[5]; } third[93 / 5];
     }
     else if (Strcmp(tag, "MLog") == 0) /* MLog [0.05] */
     {
