@@ -139,8 +139,8 @@ typedef struct
         char vendor[256];  /* Netgear */
         short empty;
         uint blank;
-        uint rg_settings_a; /* 0x9c -> 0x8c Respond to Ping on Internet Port on */
-        uint rg_settings_b;
+        uint rg_settings_a; /* 0x9c -> 0x8c Respond to Ping on Internet Port / 0x30 -> 0x32 Default DMZ Server  */
+        ubyte default_dmz_server_ip[4]; /* Default DMZ Server */
         uint rg_settings_c;
         uint rg_settings_d;
         uint rg_settings_e;
@@ -153,6 +153,8 @@ typedef struct
         byte ss[0x54c];
         byte ntp_count;
         rgltag tags[ntp_count];
+        char blankb[14];
+        ushort mtu_size_bytes; /* swy: WAN Setup - MTU Size(in bytes) */
     }
     else if (Strcmp(tag, "Ntgr") == 0) /* Ntgr [0.14] */
     {
