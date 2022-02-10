@@ -155,8 +155,8 @@ typedef struct
         ubyte use_static_ip_mask[4]; /*                                         IP Subnet Mask     */
         ubyte    gateway_ip_addr[4]; /*                                         Gateway IP Address */
         char model_a[256]; /* CG3100 */
-        char model_b[256]; /* empty */
-        char model_c[256]; /* empty */
+        char send_email_address[256]; /* Security - E-mail - Send to This E-mail Address */
+        char send_email_server [256]; /* Security - E-mail - Your Outgoing Mail Server   */
         byte unkbb[0x80];
         struct { byte array[9]; } aa[10];
         byte unkcc[0xd5];
@@ -190,6 +190,9 @@ typedef struct
         rgltag passw_dynamic;
         byte padd[8];
         rgltag CM;
+
+        char email_username[256]; // -0x22c from end of file
+        char email_password[256]; // -0x12d
     }
 
     FSeek(saved_offset);
