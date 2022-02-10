@@ -113,8 +113,21 @@ typedef struct
 
     FSeek(saved_offset);
     FSkip(block_size);
-} block_tag <optimize=false, read=Str("%s [%u.%02u]", this.tag, this.ver_a, this.ver_b)>;
+} block_tag <optimize=false, read=Str("%s [%u.%02u]", this.tag, this.ver_a, this.ver_b), comment=RecordComment>;
 
+string RecordComment( block_tag &r )
+{
+    if      (Strcmp(r.tag, "8021") == 0) /* 8021 [0.29] */ return "802.1";
+    else if (Strcmp(r.tag, "WiGu") == 0) /* WiGu [0.10] */ return "Wi-Fi guest";
+    else if (Strcmp(r.tag, "FIRE") == 0) /* FIRE [0.07] */ return "Firewall";
+    else if (Strcmp(r.tag, "CSP.") == 0) /* CSP. [1.04] */ return "???";
+    else if (Strcmp(r.tag, "CDP.") == 0) /* CDP. [1.05] */ return "???";
+    else if (Strcmp(r.tag, "MLog") == 0) /* MLog [0.05] */ return "???";
+    else if (Strcmp(r.tag, "PRNT") == 0) /* PRNT [0.05] */ return "Print";
+    else if (Strcmp(r.tag, "RG..") == 0) /* RG.. [0.30] */ return "Residential gateway";
+    else if (Strcmp(r.tag, "Ntgr") == 0) /* Ntgr [0.14] */ return "Netgear";
+    return "";
+}
 
 ubyte salted_md5[16] <format=hex>;
 
