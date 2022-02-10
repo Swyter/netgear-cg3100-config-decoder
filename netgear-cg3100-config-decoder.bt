@@ -40,9 +40,12 @@ typedef struct
         char more_crap[0xa7];
         rgltag tags[4];
         char aa[3];
-        rgltag tags[5];
+        rgltag tagsb[5];
         char aaa;
-        rgltag tags[6];
+        rgltag tagsc[1];
+        char crapb[7-3];
+        uint crup[4];
+        uint repeated[4];
     }
     else if (Strcmp(tag, "WiGu") == 0) /* WiGu [0.10] */
     {
@@ -64,15 +67,21 @@ typedef struct
     }
     else if (Strcmp(tag, "FIRE") == 0) /* FIRE [0.07] */
     {
-        int c;
+        char empty[0x8de];
+        uint count;
+        uint thing;
     }
     else if (Strcmp(tag, "CSP.") == 0) /* CSP. [1.04] */
     {
-        int d;
+        byte d; int b, c;
+
+        struct { char unk[12]; } dont_know[3];
     }
     else if (Strcmp(tag, "CDP.") == 0) /* CDP. [1.05] */
     {
-        int e;
+        char crap[116]; rgltag thing; char more[6];
+
+        struct { char content[25]; } first[15]; //356 / 25];
     }
     else if (Strcmp(tag, "MLog") == 0) /* MLog [0.05] */
     {
