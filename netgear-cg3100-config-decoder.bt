@@ -3,9 +3,10 @@
 //
 //      File: Netgear GC3100 *decoded* config backup
 //   Authors: Swyter
-//   Version: 2022.02.08
+//   Version: 2022.02.05
 //   Purpose: Open descrambled GatewaySettings.bin files.
 //  Category: Network
+//  ID Bytes: [+16] 36 75 39 65 [+46] 01 02
 // File Mask: GatewaySettings*.bin*
 //------------------------------------------------
 
@@ -20,10 +21,7 @@ typedef struct
 
 string read_rgltag(struct rgltag& _thing)
 {
-    if (_thing.tag_len <= 0)
-        return "<empty>";
-    else
-        return _thing.s;
+    if (_thing.tag_len <= 0) return "<empty>"; else return _thing.s;
 }
 
 typedef struct
@@ -68,7 +66,7 @@ typedef struct
     {
         byte h;
         char password[9];
-        char vendor[256]; /* Netgear */
+        char vendor[256];  /* Netgear */
         ubyte unk_crap[0x1a];
         char model_a[256]; /* CG3100 */
         char model_b[256]; /* empty */
@@ -109,33 +107,33 @@ typedef struct
     FSeek(saved_offset);
     FSkip(block_size);
 
-} block_tag <optimize=false, read=Str("%s [%u.%02u]", this.tag, this.ver_a, this.ver_b), comment=RecordComment>;
+} block_tag <optimize=false, read=Str("%s [%u.%02u]", this.tag, this.ver_a, this.ver_b), comment=comment_block_tag>;
 
-string RecordComment( block_tag &r )
+string comment_block_tag( block_tag &r )
 {
-    if      (Strcmp(r.tag, "8021") == 0) /* 8021 [0.29] */ return "802.1";
+    if      (Strcmp(r.tag, "8021") == 0) /* 8021 [0.29] */ return "Wi-Fi (IEEE 802.11)";
     else if (Strcmp(r.tag, "WiGu") == 0) /* WiGu [0.10] */ return "Wi-Fi guest";
     else if (Strcmp(r.tag, "FIRE") == 0) /* FIRE [0.07] */ return "Firewall";
     else if (Strcmp(r.tag, "CSP.") == 0) /* CSP. [1.04] */ return "???";
     else if (Strcmp(r.tag, "CDP.") == 0) /* CDP. [1.05] */ return "???";
-    else if (Strcmp(r.tag, "MLog") == 0) /* MLog [0.05] */ return "???";
+    else if (Strcmp(r.tag, "MLog") == 0) /* MLog [0.05] */ return "Multiple systems operator (MSO) login";
     else if (Strcmp(r.tag, "PRNT") == 0) /* PRNT [0.05] */ return "Print";
     else if (Strcmp(r.tag, "RG..") == 0) /* RG.. [0.30] */ return "Residential gateway";
     else if (Strcmp(r.tag, "Ntgr") == 0) /* Ntgr [0.14] */ return "Netgear";
     return "";
 }
 
+
+/* swy: here's the start of the actual file */
 ubyte salted_md5[16] <format=hex, comment="MD5 checksum of the config data block, using the provided size. Append the magic «2Pslc;u(egmd0-'x» salt value afterwards.">;
 
 struct config_t
 {
-    char routerid_string[74];                       /* swy: 6u9e9ewf0jt9y85w690je4669jye4d-056t9p48jp4ee6u9ee659jy9e-54e4j6r0j069k-056 */
-    byte ver_a, ver_b;                              /* swy: 0x0102 => 1.2, maybe */
-    uint size <format=hex, comment="Total size">;   /* swy: more often than not there's an extra/tailing 0x1 or 0x0 byte after the stated size; which breaks the bcm2cfg validation because that tool only chops off the first 16 bytes and appends the MD5 salt without reading the actual byte count here */
+    char routerid_string[74];                     /* swy: 6u9e9ewf0jt9y85w690je4669jye4d-056t9p48jp4ee6u9ee659jy9e-54e4j6r0j069k-056 */
+    byte ver_a, ver_b;                            /* swy: 0x0102 => 1.2, maybe */
+    uint size <format=hex, comment="Total size">; /* swy: more often than not there's an extra/tailing 0x1 or 0x0 byte after the stated size; which breaks the bcm2cfg validation because that tool only chops off the first 16 bytes and appends the MD5 salt without reading the actual byte count here */
 
     while (FTell() < FileSize() - 1)
         block_tag block;
 
-    //byte prev;
-    //byte pad[size-(startof(prev)+1 - startof(config))];
 } config <open=true>;
