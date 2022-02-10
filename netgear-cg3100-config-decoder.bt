@@ -79,9 +79,11 @@ typedef struct
     }
     else if (Strcmp(tag, "CDP.") == 0) /* CDP. [1.05] */
     {
-        char crap[116]; rgltag thing; char more[6];
+        char crap[116]; rgltag thing; char more[4];
 
         struct { char content[25]; } first[15]; //356 / 25];
+        struct { char content[14]; } second[882 / 14];
+        struct { char content[15]; } third[93 / 15];
     }
     else if (Strcmp(tag, "MLog") == 0) /* MLog [0.05] */
     {
