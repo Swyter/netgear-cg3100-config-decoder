@@ -137,7 +137,13 @@ typedef struct
         byte h;
         char password[9];
         char vendor[256];  /* Netgear */
-        ubyte unk_crap[0x1a];
+        short empty;
+        uint blank;
+        uint rg_settings_a; /* 0x9c -> 0x8c Respond to Ping on Internet Port on */
+        uint rg_settings_b;
+        uint rg_settings_c;
+        uint rg_settings_d;
+        uint rg_settings_e;
         char model_a[256]; /* CG3100 */
         char model_b[256]; /* empty */
         char model_c[256]; /* empty */
