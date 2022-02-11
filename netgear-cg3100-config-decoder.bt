@@ -1,10 +1,11 @@
 //------------------------------------------------
 //--- 010 Editor v12.0.1 Binary Template
 //
-//      File: Netgear GC3100 *decoded* config backup
+//      File: Netgear CG3100 *decoded* config backup
 //   Authors: Swyter
 //   Version: 2022.02.05
-//   Purpose: Open descrambled GatewaySettings.bin files.
+//   Purpose: Open descrambled GatewaySettings.bin files for this «carrier-grade»
+//            Broadcom BCM3380A1-based cable-modem-router gateway.
 //  Category: Network
 //  ID Bytes: [+16] 36 75 39 65 [+46] 01 02
 // File Mask: GatewaySettings*.bin*
@@ -164,7 +165,7 @@ typedef struct
         byte ntp_count;
         rgltag tags[ntp_count];
         char blankb[14];
-        ushort mtu_size_bytes; /* swy: WAN Setup - MTU Size(in bytes) */
+        ushort mtu_size_bytes; /* swy: WAN Setup - MTU Size (in bytes) */
     }
     else if (Strcmp(tag, "Ntgr") == 0) /* Ntgr [0.14] */
     {
