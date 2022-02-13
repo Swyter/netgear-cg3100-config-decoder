@@ -1,5 +1,4 @@
-from ast import arguments
-import os, sys
+import sys
 import hashlib, struct
 
 filename="GatewaySettings(6).bin"
