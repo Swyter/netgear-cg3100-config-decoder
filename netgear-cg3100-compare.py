@@ -13,7 +13,7 @@ def print_log(str):
     print('    ' + str)
 
 def open_compare_tool(file_a, file_b):
-    call(['010Editor.exe', f'-compare:{file_a}::{file_b}::\\b\\e\\t', '-template:netgear-cg3100-config-decoder.bt'])
+    call(['010Editor.exe', f'-compare:{file_a}::{file_b}::\\b\\e\\t', '-template:netgear-cg3100-config-decoder.bt', '-nowarnings'], cwd = os.getcwd())
 
 def get_config_file(file):
     try:
@@ -44,13 +44,11 @@ if __name__ == '__main__':
             print_log('[>] launching comparison tool...')
             open_compare_tool(f'{file_befor}.dec', f'{file_after}.dec')
 
-            print_log('[i] press the enter key...'); input()
+            #print_log('[i] press the enter key...'); input()
 
             # swy: swap them so that we can chain the comparison with the previous one; A -> B then B -> C
             print_log('[>] swapping comparison order for the next run...')
-            tmp = file_befor
-            file_befor = file_after
-            file_after = tmp
+            file_befor, file_after = file_after, file_befor
             
     except KeyboardInterrupt:
         print('\n'); print_log('[!] exiting loop...\n')
