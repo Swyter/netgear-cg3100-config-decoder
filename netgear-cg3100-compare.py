@@ -10,10 +10,10 @@ file_after = 'GatewaySettings_b.bin'
 from subprocess import call
 
 def print_log(str):
-    print('    ' + str)
+    print(str)
 
 def open_compare_tool(file_a, file_b):
-    call(['010Editor.exe', f'-compare:{file_a}::{file_b}::\\b\\e\\t', '-template:netgear-cg3100-config-decoder.bt', '-nowarnings'], cwd = os.getcwd())
+    call(['010Editor.exe', f'-compare:{file_a}::{file_b}::\\b\\e\\t', '-template:netgear-cg3100-config-decoder.bt'], cwd = os.getcwd())
 
 def get_config_file(file):
     try:
@@ -30,15 +30,15 @@ def get_config_file(file):
 
 if __name__ == '__main__':
     try:
-        print_log('[i] (1) downloading «before» file')
+        print_log('[!] (1) downloading «before» file')
         get_config_file(file_befor); call(['python', './netgear-cg3100-config-decoder.py', file_befor]); print('\n')
+
+        print_log('[>] waiting for after; press the enter key when ready...'); input()
 
         while(True):
             print('\n--\n')
 
-            print_log('[>] waiting for after; press the enter key when ready...'); input()
-
-            print_log('[i] (2) downloading «after» file')
+            print_log('[!] (2) downloading «after» file')
             get_config_file(file_after); call(['python', './netgear-cg3100-config-decoder.py', file_after]); print('\n')
 
             print_log('[>] launching comparison tool...')
