@@ -36,7 +36,9 @@ typedef struct
     {
         char wifi_ssid[33];
         char settings_block[91];
-        char crap[0xef];
+        char crap[0xc0]; // Enable SSID Broadcast: 0x0101 -> 0x0001
+        uint wifi_config_a;
+        char crop[43];
         rgltag passwd;
         char more_crap[0xa7];
         /* rgltag tags[4];
