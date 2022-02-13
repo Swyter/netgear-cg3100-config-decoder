@@ -1,0 +1,100 @@
+
+BCM3380A1
+BCM3380A1 TP0
+1
+Sync:1
+346890
+MemSize:             64 M
+
+BootLoader Version: 2.3.0R4 Pre-release Gnu spiboot reduced DDR drive
+Build Date: Apr 24 2012
+Build Time: 17:52:30
+SPI flash ID 0x012018, size 16MB, block size 64KB, write buffer 256, busy bit 1
+
+Signature/PID: a0e3
+
+Reset BCM53115 - Low GPIO-16 5 ms
+Image 1 Program Header:
+   Signature: a0e3
+     Control: 0005
+   Major Rev: 0003
+   Minor Rev: 0000
+  Build Time: 2014/1/22 06:39:33 Z
+ File Length: 4165922 bytes
+Load Address: 80004000
+    Filename: ecram_sto.bin
+         HCS: 9974
+         CRC: 9a6028b1
+
+
+Found image 1 at offset 20000
+.
+
+Performing CRC on Image 1...
+CRC time = 65840851
+Detected LZMA compressed image... decompressing...
+Target Address: 0x80004000
+decompressSpace is 0x4000000
+Elapsed time 1233513781
+
+Decompressed length: 19306932
+
+Executing Image 1...
+
+
+ eCos - hal_diag_init
+Init device '/dev/BrcmTelnetIoDriver'
+Init device '/dev/ttydiag'
+Init tty channel: 8126d428
+Init device '/dev/tty0'
+Init tty channel: 8126d448
+Init device '/dev/haldiag'
+HAL/diag SERIAL init
+Init device '/dev/ser0'
+BCM 33XX SERIAL init - dev: 0.2
+Set output buffer - buf: 0x8159d488 len: 4096
+Set input buffer - buf: 0x8159e488 len: 4096
+BCM 33XX SERIAL config
+Init device '/dev/ser1'
+BCM 33XX SERIAL init - dev: 0.3
+Set output buffer - buf: 0x8159f488 len: 4096
+Set input buffer - buf: 0x815a0488 len: 4096
+BCM 33XX SERIAL config
+
+LsSpiInit 3380
+[00:00:00 01/01/1970] [tStartup] BcmBfcStdEmbeddedTarget::InitStorageDrivers:  (BFC Target) Configuring/Loading Flash driver...
+[00:00:00 01/01/1970] [tStartup] BcmSpiFlashDevice::DetectFlash:  (SPI Flash Device Factory) WARNING - Detected SPI flash with JEDEC ID =0x12018
+[00:00:00 01/01/1970] [tStartup] FlashDeviceDriver::SpiFlashPlaceRegions:  (Flash Driver C API) WARNING - Permanent NonVol would fit in the boot block of this flash device, but I found existing NonVol in the following block; using this location instead...
+[00:00:00 01/01/1970] [tStartup] BcmBfcStdEmbeddedTarget::InitStorageDrivers:  (BFC Target) Loading BootloaderStore driver...
+[00:00:00 01/01/1970] [tStartup] BcmBfcStdEmbeddedTarget::InitStorageDrivers:  (BFC Target) Loading ProgramStore driver...
+ProgramStoreDeviceDriver::ProgramStoreDriverInit:  INFO - Initializing...
+[00:00:00 01/01/1970] [tStartup] BcmBfcStdEmbeddedTarget::InitStorageDrivers:  (BFC Target) Loading NonVol driver...
+[00:00:00 01/01/1970] [tStartup] BcmBfcStdEmbeddedTarget::InitStorageDrivers:  (BFC Target) Storage drivers initialized successfully.
+[00:00:00 01/01/1970] [tStartup] BcmBfcStdEmbeddedTarget::InitDeviceAbstractions:  (BFC Target) Creating singletons for ProgramStore/BootloaderStore/NonVol devices...
+Detecting the next image number that we will store to by default...
+Bootloader indicates we are running image 1
+By default, we will dload to image number 2!
+
+[00:00:00 01/01/1970] [tStartup] BcmBfcStdEmbeddedTarget::InitDeviceAbstractions:  (BFC Target) Device abstraction singletons created successfully.
+
+BcmCapNonVolSettings::GetSingletonInstance:  WARNING - the singleton instance is NULL, and someone is accessing it!
+BcmPcpClientServiceAppIf::GetSingletonInstance:  WARNING - the singleton is NULL, and someone is accessing it!
+WARNING: ResetDefaultBlindEmtaData() -Resetting EMTA non-vol data section to default values
+mtaNvCalcChecksum: checksum= 1273101532
+Reading Permanent settings from non-vol...
+Checksum for permanent settings:  0xac97768f
+Settings were read and verified.
+
+
+Reading Dynamic settings from non-vol...
+Checksum for dynamic settings:  0xac218070
+
+
+
+ we found one in the table already!!!!
+Settings were read and verified.
+
+ERROR calling HalQueryInfo(HAL_80211_OID_QUERY_BAND_LIST)!!
+ERROR calling HalQueryInfo(HAL_80211_OID_QUERY_BAND_LIST)!!
+ERROR calling HalQueryInfo(HAL_80211_OID_QUERY_BAND_LIST)!!
+ERROR calling HalQueryInfo(HAL_80211_OID_QUERY_BAND_LIST)!!
