@@ -1,14 +1,22 @@
-import os, sys
+import os, sys, platform
 from urllib import request
 import requests
 
-gateway_ip_endpoint = "192.168.99.1"
-binary_010_editor   = "C:\Program Files\\010 Editor\\010Editor.exe"
+gateway_ip_endpoint   = 'MSO:0n0Adm1Ni$tRaT0r@192.168.99.1'
+binary_010_editor_wsl = '/mnt/c/Program Files/010 Editor/010Editor.exe'
+binary_010_editor     = 'C:\\Program Files\\010 Editor\\010Editor.exe'
+
+file_befor = 'GatewaySettings_bef.bin'
+file_after = 'GatewaySettings_aft.bin'
 
 from subprocess import call
 
 def open_compare_tool(file_a, file_b):
-    call([binary_010_editor, "-compare:{file_a}::{file_b}}"])
+    binary = binary_010_editor
+    if platform.uname().release.endswith("WSL2"):
+        binary = binary_010_editor_wsl
+
+    call([binary, f'-compare:{file_a}::{file_b}::\\b\\e\\t', '-safe', '-template:netgear-cg3100-config-decoder.bt', '-nowarnings'])
 
 def get_config_file(file = None):
     try:
@@ -24,18 +32,24 @@ def get_config_file(file = None):
     return res.content
 
 def compare():
-    print(f'[i] opening »')
+    print('\n--\n')
+    print('    [i] (1) downloading «before» file'); get_config_file(file_befor)
 
-    get_config_file("GatewaySettings_before.bin")
+    input('    [>] waiting for after...')
 
-    input("[>] waiting for after...")
+    print('    [i] (2) downloading «after» file');  get_config_file(file_after)
 
-    get_config_file("GatewaySettings_after.bin")
+    print('    [!] decoding both files:')
+    call(["python", "./netgear-cg3100-config-decoder.py", file_befor])
+    call(["python", "./netgear-cg3100-config-decoder.py", file_after])
 
-    call(["python", "./netgear-cg3100-config-decoder.py", "GatewaySettings_before.bin"])
-    call(["python", "./netgear-cg3100-config-decoder.py", "GatewaySettings_after.bin"])
-
-    open_compare_tool("GatewaySettings_before.bin.dec", "GatewaySettings_after.bin.dec")
+    print('    [>] launching comparison tool...')
+    open_compare_tool('{file_befor}.dec', '{file_after}.dec')
 
 if __name__ == "__main__":
-  compare()
+    try:
+        while(True):
+            compare()
+    except KeyboardInterrupt:
+        print("\n    [!] exiting loop...\n")
+        pass
