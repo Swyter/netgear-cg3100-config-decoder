@@ -55,12 +55,12 @@ typedef struct
         ubyte radius_server_ip_addr[4]; ushort radius_server_port; byte pad;
         rgltag radius_server_shared_secret;
 
-        uint wep_thing;
+        uint wep_thing; uint blank;
 
         uint one, one_b, zero, zero, zero, zero, zero, one;
 
         rgltag wep_passwd;
-
+/*
         uint security_options; // WPA2-PSK [AES] = 0x00001000 and 0x0128FF in config block, WPA-PSK [TKIP] + WPA2-PSK [AES] = 0x00001400 and 0x012801FF in config block.
         byte conf_a;
         ubyte wlan_channel; // Channel // 0 == Auto
@@ -77,6 +77,7 @@ typedef struct
         uint wireless_isolation; // off 0x01 00 00 -> on 0x05 00 00 // Enable Wireless Isolation 
         uint crep[2];
         uint repeated[4];
+*/
     }
     else if (Strcmp(tag, "WiGu") == 0) /* WiGu [0.10] */
     {
@@ -98,11 +99,10 @@ typedef struct
     }
     else if (Strcmp(tag, "FIRE") == 0) /* FIRE [0.07] */
     {
-        byte pad;
-        uint number;
+        byte zero, zero, one, url_keyword_blocking /* 0 = Never, 1 = Always */, one;
         uint entry_count;
         uint zero;
-        struct entry { char keyword[32]; } entries[70]; //entry_count + (0x830 / 32) + 1];
+        struct entry { char keyword[32]; } entries[entry_count]; //entry_count + (0x830 / 32) + 1]; // space for 70 entries, maybe
 
         char empty[0x8de];
 
@@ -204,7 +204,12 @@ typedef struct
     }
     else if (Strcmp(tag, "Ntgr") == 0) /* Ntgr [0.14] */
     {
-        byte pad[1800 - 1];
+
+        struct { char protocol_tag[16]; } prot[(1800 - 1) / 16];
+        //byte pad[1800 - 1];
+
+        byte pad[7];
+
         uint unk, un;
 
         char superuser[16];
