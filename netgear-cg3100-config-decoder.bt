@@ -196,12 +196,18 @@ typedef struct
 
         ubyte ip_firewall[4];
         ubyte ip_firewall_b[4];
-        ubyte ip_firewall_c[4];
-        ubyte ip_firewall_d[4];
+        ubyte ip_firewall_range_start[4];
+        ubyte ip_firewall_range_end[4];
         ubyte ip_firewall_e[4];
         ubyte ip_firewall_f[4];
 
-        byte unkbb[0x80];
+        byte unkbb[56];
+        
+        ushort port_a, port_b, port_starting, port_ending;
+
+        ushort thing, thong;
+        byte unkcc[36];
+
         struct { byte array[9]; } aa[10];
         byte unkcc[0xd5];
         byte ss[0x54c];
