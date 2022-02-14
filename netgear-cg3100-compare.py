@@ -13,7 +13,7 @@ def print_log(str):
     print(str)
 
 def open_compare_tool(file_a, file_b):
-    call(['010Editor.exe', f'-compare:{file_a}::{file_b}::\\b\\e\\t', '-template:netgear-cg3100-config-decoder.bt'], cwd = os.getcwd())
+    call(['010Editor.exe', f'-compare:{file_a}::{file_b}::\\e\\t', '-template:netgear-cg3100-config-decoder.bt'], cwd = os.getcwd())
 
 def get_config_file(file):
     try:
