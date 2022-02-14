@@ -39,11 +39,22 @@ typedef struct
         char crap[0xc0];
         uint wifi_config_a; // Enable SSID Broadcast: 0x0101 -> 0x0001
         char crop[43];
-        rgltag passwd;
-        char more_crap[0x9e];
+        rgltag wpa_passwd;
+
+        uint blank[2];
+        uint thing, seven;
+        uint wep_thing;
+
+        uint one, one_b, zero, zero, zero, zero, zero, one;
+
+        rgltag wep_passwd;
+
+        uint security_options; // WPA2-PSK [AES] = 0x00001000 and 0x0128FF in config block, WPA-PSK [TKIP] + WPA2-PSK [AES] = 0x00001400 and 0x012801FF in config block.
         byte conf_a;
-        ubyte wlan_channel, a, b; // Channel
-        byte more[5];
+        ubyte wlan_channel; // Channel // 0 == Auto
+        ubyte mode_145_mbps; // 0 = 54 Mbps, 1 = 145 Mbps or more
+        ushort mode; // 54 Mbps = 0x1400, 145 Mbps = 0x1400, 300 Mbps = 0x28FF
+        byte more[4];
         rgltag tags[4];
         char aa[3];
         rgltag tagsb[5];
