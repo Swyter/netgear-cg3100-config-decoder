@@ -35,7 +35,15 @@ typedef struct
     if      (Strcmp(tag, "8021") == 0) /* 8021 [0.29] */
     {
         char wifi_ssid[33];
-        char settings_block[91];
+        char settings_block[10];
+
+        ubyte wep_key_1[5];
+        ubyte wep_key_2[5];
+        ubyte wep_key_3[5];
+        ubyte wep_key_4[5];
+
+        char settings_block_b[61];
+
         char crap[0xc0];
         uint wifi_config_a; // Enable SSID Broadcast: 0x0101 -> 0x0001
         char crop[43];
