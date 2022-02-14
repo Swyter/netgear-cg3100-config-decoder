@@ -207,7 +207,7 @@ typedef struct
 
         struct { byte array[9]; } aa[10];
         byte unkcd[0xdd];
-        ubyte firewall_protocol_sel[10]; // same order; 03 = UDP, 04 = TCP, FF = TCP/UDP, FE = ???
+        enum<ubyte> { UDP = 0x03, TCP = 0x04, Unused = 0xFE, TCP_UDP = 0xFF } firewall_protocol_sel[10]; // same order; 03 = UDP, 04 = TCP, FF = TCP/UDP, FE = ???
         ubyte unkdf[0x542];
         byte ntp_count;
         rgltag tags[ntp_count];
