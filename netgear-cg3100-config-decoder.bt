@@ -194,23 +194,21 @@ typedef struct
         char send_email_address[256]; /* Security - E-mail - Send to This E-mail Address */
         char send_email_server [256]; /* Security - E-mail - Your Outgoing Mail Server   */
 
-        ubyte ip_firewall[4];
-        ubyte ip_firewall_b[4];
-        ubyte ip_firewall_range_start[4];
-        ubyte ip_firewall_range_end[4];
-        ubyte ip_firewall_e[4];
-        ubyte ip_firewall_f[4];
+        struct
+        {
+            ubyte ip_firewall_range_start[4];
+            ubyte ip_firewall_range_end[4];
+        } ip_firewall[10];
 
-        byte unkbb[56];
-        
-        ushort port_a, port_b, port_starting, port_ending;
-
-        ushort thing, thong;
-        byte unkcc[36];
+        struct
+        {
+            ushort port_starting, port_ending;
+        } port_firewall[10];
 
         struct { byte array[9]; } aa[10];
-        byte unkcc[0xd5];
-        byte ss[0x54c];
+        byte unkcd[0xdd];
+        ubyte firewall_protocol_sel[10]; // same order; 03 = UDP, 04 = TCP, FF = TCP/UDP, FE = ???
+        ubyte unkdf[0x542];
         byte ntp_count;
         rgltag tags[ntp_count];
         char blankb[14];
