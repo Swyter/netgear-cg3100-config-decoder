@@ -42,7 +42,9 @@ typedef struct
         ubyte wep_key_3[5];
         ubyte wep_key_4[5];
 
-        char settings_block_b[61];
+        ubyte chosen_wep_key_index; // Key 1 == 1 and so on, from 1 to 4
+
+        char settings_block_b[60];
 
         char crap[0xc0];
         uint wifi_config_a; // Enable SSID Broadcast: 0x0101 -> 0x0001
