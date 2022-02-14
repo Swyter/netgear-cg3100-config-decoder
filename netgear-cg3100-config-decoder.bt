@@ -40,7 +40,10 @@ typedef struct
         uint wifi_config_a; // Enable SSID Broadcast: 0x0101 -> 0x0001
         char crop[43];
         rgltag passwd;
-        char more_crap[0xa7];
+        char more_crap[0x9e];
+        byte conf_a;
+        ubyte wlan_channel, a, b; // Channel
+        byte more[5];
         rgltag tags[4];
         char aa[3];
         rgltag tagsb[5];
