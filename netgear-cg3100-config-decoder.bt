@@ -51,8 +51,10 @@ typedef struct
         char crop[43];
         rgltag wpa_passwd;
 
-        uint blank[2];
-        uint thing, seven;
+        uint blank;
+        ubyte radius_server_ip_addr[4]; ushort radius_server_port; byte pad;
+        rgltag radius_server_shared_secret;
+
         uint wep_thing;
 
         uint one, one_b, zero, zero, zero, zero, zero, one;
