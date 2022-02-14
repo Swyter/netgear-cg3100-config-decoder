@@ -193,6 +193,14 @@ typedef struct
         char model_a[256]; /* CG3100 */
         char send_email_address[256]; /* Security - E-mail - Send to This E-mail Address */
         char send_email_server [256]; /* Security - E-mail - Your Outgoing Mail Server   */
+
+        ubyte ip_firewall[4];
+        ubyte ip_firewall_b[4];
+        ubyte ip_firewall_c[4];
+        ubyte ip_firewall_d[4];
+        ubyte ip_firewall_e[4];
+        ubyte ip_firewall_f[4];
+
         byte unkbb[0x80];
         struct { byte array[9]; } aa[10];
         byte unkcc[0xd5];
