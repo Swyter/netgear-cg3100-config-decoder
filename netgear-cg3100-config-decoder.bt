@@ -102,9 +102,16 @@ typedef struct
         byte zero, zero, one, url_keyword_blocking /* 0 = Never, 1 = Always */, one;
         uint entry_count;
         uint zero;
-        struct entry { char keyword[32]; } entries[entry_count]; //entry_count + (0x830 / 32) + 1]; // space for 70 entries, maybe
+        struct entry { char keyword[32]; } entries[16]; // space for 16 entries
 
-        char empty[0x8de];
+        char empty_a[0x6d4];
+        char unk_data[5];
+        char empty_b[0x1ecd];
+
+        entry entries_ext[50 - 16]; // space for the remaining amount of entries required to reach 50 in total: 33
+
+        ubyte ip_subnet_addr[4];
+        uint six;
 
     }
     else if (Strcmp(tag, "CSP.") == 0) /* CSP. [1.04] */
@@ -185,7 +192,7 @@ typedef struct
         //       1 -> Use These DNS Servers (Set) / Use Static IP Address  (DNS IPs stored at MLog start -0x6D until -0x64)
         //        1 -> Default DMZ Server (Set)
         //         1
-
+        /* swy: 0x369c -> 0x3690 Services Blocking from Always to Never */
         ubyte default_dmz_server_ip[4]; /* Default DMZ Server */
 
         ubyte use_static_ip_addr[4]; /* Internet Setup - Use Static IP Address: IP Address         */
