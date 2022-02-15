@@ -211,21 +211,21 @@ typedef struct
         ubyte unkdf[0x172];
 
 
+        /* swy: they seemingly expanded the amount of rules later to fit
+                another 20 entries in a slightly more compact format */
         struct
         {
             ubyte ip_firewall_range_start[4];
             ubyte ip_firewall_range_end[4];
-        } ip_firewall_b[22];
-
-        uint blank;
+            ubyte one_when_in_use;
+        } ip_firewall_b[20];
 
         struct
         {
-            ushort port_starting, port_ending; fw_prot prot; byte one_when_in_use;
+            ushort port_starting, port_ending;
+            fw_prot prot;
+            byte one_when_in_use;
         } port_firewall_and_prot_b[20];
-
-        enum fw_prot firewall_protocol_sel_b[10]; // same order; 03 = UDP, 04 = TCP, FF = TCP/UDP, FE = ???
-        
 
         byte ntp_count;
         rgltag tags[ntp_count];
