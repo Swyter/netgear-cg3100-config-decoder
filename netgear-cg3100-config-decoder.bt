@@ -187,10 +187,13 @@ typedef struct
         //         1
 
         ubyte default_dmz_server_ip[4]; /* Default DMZ Server */
+
         ubyte use_static_ip_addr[4]; /* Internet Setup - Use Static IP Address: IP Address         */
         ubyte use_static_ip_mask[4]; /*                                         IP Subnet Mask     */
         ubyte    gateway_ip_addr[4]; /*                                         Gateway IP Address */
+
         char model_a[256]; /* CG3100 */
+
         char send_email_address[256]; /* Security - E-mail - Send to This E-mail Address */
         char send_email_server [256]; /* Security - E-mail - Your Outgoing Mail Server   */
 
@@ -207,6 +210,7 @@ typedef struct
 
         struct { byte array[9]; } aa[10];
         byte unkcd[0xdd];
+
         enum<ubyte> fw_prot{ UDP = 0x03, TCP = 0x04, Unused = 0xFE, TCP_UDP = 0xFF } firewall_protocol_sel[10]; // same order; 03 = UDP, 04 = TCP, FF = TCP/UDP, FE = ???
         ubyte unkdf[0x172];
 
@@ -227,8 +231,15 @@ typedef struct
             byte one_when_in_use;
         } port_firewall_and_prot_b[20];
 
-        byte ntp_count;
-        rgltag tags[ntp_count];
+        struct
+        {
+            ubyte unk[26];
+        } unk_struct[20];
+
+        ubyte more_unk[0x9c];
+
+        ubyte ntp_count; rgltag tags[ntp_count];
+
         char blankb[14];
         ushort mtu_size_bytes; /* swy: WAN Setup - MTU Size (in bytes) */
     }
